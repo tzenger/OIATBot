@@ -33,17 +33,17 @@ while True:
     else:
         counter += 1
 
-    compare.ifGemFull(screenshot, True)
     if compare.ifGemFull(screenshot, True) == 1:
         print('starting gem pop')
         time.sleep(3)
         ult.menuButton()
         ult.gemPopButton()
         ult.gemPopStart()
-        time.sleep(5) # arbutrary time
-        if compare.gemPopCloseButton(screenshot):
-            ult.closeGemPop()
-            time.sleep(3)
+        time.sleep(2) # arbitrary value
+        while not compare.gemPopCloseButton(screenshot):
+            time.sleep(0.1)
+        ult.closeGemPop()
+        time.sleep(2) # arbitrary value
 
 
     # if frame is read correctly ret is True
