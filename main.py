@@ -10,14 +10,10 @@ import ult
 counter = 0
 limit = 1000
 
-
-
 time.sleep(1)
 screenshot = capture.windowCapture()
-print(compare.ifGemFull(screenshot, True))
 
-
-while False:
+while True:
 
     screenshotOld = screenshot
     screenshot = capture.windowCapture()
@@ -32,12 +28,25 @@ while False:
 
     ult.randomPath(20)
     if counter >= limit:
-        ult.clickHere(1280, 1350)
+        ult.closeNewEgg()
         counter = 0
     else:
         counter += 1
 
-# if frame is read correctly ret is True
+    compare.ifGemFull(screenshot, True)
+    if compare.ifGemFull(screenshot, True) == 1:
+        print('starting gem pop')
+        time.sleep(3)
+        ult.menuButton()
+        ult.gemPopButton()
+        ult.gemPopStart()
+        time.sleep(5) # arbutrary time
+        if compare.gemPopCloseButton(screenshot):
+            ult.closeGemPop()
+            time.sleep(3)
+
+
+    # if frame is read correctly ret is True
     if cv.waitKey(1) == ord('q'):
         cv.destroyAllWindows()
         break

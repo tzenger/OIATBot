@@ -64,10 +64,6 @@ def compare(current, previous):
     return (new, boxCoords)
 
 def ifGemFull(current, blue):
-    left = 0
-    top = 0
-    right = 0
-    bottom = 0
     bGemPos = 906
     rGemPos = 1055
     if blue:
@@ -84,10 +80,33 @@ def ifGemFull(current, blue):
     #cv2.imwrite("croppedred.jpg", crop)
 
     hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
-    cv2.imwrite("hsvcrop.jpg", hsv)
     h, w, c = hsv.shape
     for i in range(h):
         for j in range(w):
-            k = hsv[i, j]
-            print(k)
-    return 4 # change when fininshed with function
+            if hsv[i, j][0] <= 80 and hsv[i, j][0] >= 25:
+                print('yellow')
+                return 0 # yellow
+            if hsv[i, j][0] == 0 and hsv[i, j][1] == 0 and hsv[i, j][2] >= 80:
+                print('white')
+                return 1 # white
+    print("possible egg hunt")
+    return False # neither yellow or white
+
+def gemPopCloseButton(current):
+    collectButtX = 1280
+    collectButtY = 1393
+
+    left = collectButtX - 3
+    top = collectButtY
+    right = collectButtX + 3
+    bottom = collectButtY + 1
+    crop = current[top:bottom, left:right]
+    
+    hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
+    h, w, c = hsv.shape
+    for i in range(h):
+        for j in range(w):
+            if hsv[i, j][0] == 264:
+                print('purple')
+                return True # button exists
+    return False # button does not exist

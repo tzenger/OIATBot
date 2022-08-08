@@ -35,13 +35,33 @@ def clickHere(x, y):
     pyautogui.moveTo(x, y)
     pyautogui.click()
 
+def closeNewEgg():
+    clickHere(1280, 1350)
+
+def menuButton():
+    clickHere(1635, 1389)
+    time.sleep(0.5)
+
+def gemPopButton():
+    clickHere(1635, 1043)
+    time.sleep(0.5)
+
+def gemPopStart():
+    clickHere(1278, 787)
+    time.sleep(0.5)
+
+def closeGemPop():
+    clickHere(1280, 1393)
+    time.sleep(0.5)
+
 def randomPath(i):
     random.seed(random.seed(43))
     for i in range(i):
         move(random.randint(xLower, xUpper), random.randint(yLower, yUpper))
         pyautogui.click()
-        print("help")
 
+
+#experiemntal stuff
 def newFind(screenshot):
     newFindImg = cv2.imread('./images/newfind.png', cv2.IMREAD_UNCHANGED)
     result = cv2.matchTemplate(newFindImg, screenshot, cv2.TM_CCOEFF_NORMED)
