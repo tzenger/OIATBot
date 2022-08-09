@@ -1,18 +1,20 @@
 from asyncio import create_subprocess_exec
 from asyncio.windows_events import NULL
 from multiprocessing.connection import wait
+from tkinter import W
 import pyautogui
 import threading
 import keyboard
 import time
 import random
 import cv2
+import compare
 pyautogui.PAUSE = 0.000000001 # sets delay between pyautogui actions
 
 
 xLower = 915
 xUpper = 1615
-yLower = 200
+yLower = 180
 yUpper = 1224
 
 def printPosition():
@@ -54,22 +56,48 @@ def closeGemPop():
     clickHere(1280, 1393)
     time.sleep(0.5)
 
+def closeGemPopMenu():
+    clickHere(1280, 908)
+    time.sleep(0.5)
+
 def randomPath(i):
     random.seed(random.seed(43))
     for i in range(i):
         move(random.randint(xLower, xUpper), random.randint(yLower, yUpper))
         pyautogui.click()
 
+#  def eggHuntPath(curr, past):
+#     w = 1674 - 877
+#     h = 1280 - 170
+#     xOffset = 877
+#     yOffset = 170
+#     stepX = 16
+#     stepY = 30
+#     alternate = False
+    
+#     huntEnd = False
+#     for i in range(stepY):
+#         compare.compare(curr, past)
+#         if compare.ifGemFull(curr, True) == 0:
+#             time.sleep(0.05)
+#             print("WE OUT AND DONE BBABYA")
+#             break
+#         for j in range(stepX):
+#             if alternate:
+#                 clickHere(xOffset + j * (w/stepX), yOffset + i * (h / stepY))
+#                 time.sleep(0.001)
+#                 alternate = True
+                
+#             else:
+#                clickHere(xOffset + (j + 1) * (w/stepX), yOffset + i * (h / stepY))
+#                time.sleep(0.001)
+#                alternate = False
+            
+#     print("egg hunt has snaked")
 
-#experiemntal stuff
-def newFind(screenshot):
-    newFindImg = cv2.imread('./images/newfind.png', cv2.IMREAD_UNCHANGED)
-    result = cv2.matchTemplate(newFindImg, screenshot, cv2.TM_CCOEFF_NORMED)
-    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    if(max_val >= 0.99):
-        clickHere(1280, 1350)
 
 
-# Close (1280, 1290 or 1348)
+# size x - 877 -> 1674
+# size y - 170 -> 1280
 
 

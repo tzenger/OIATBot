@@ -63,6 +63,14 @@ def compare(current, previous):
 
     return (new, boxCoords)
 
+
+# determines if a gem storage is full.
+# current -> screenshot of screen
+# blue -> blue gem or not (True = blue, False = red)
+# return values
+# 0 -> yellow (not full)
+# 1 -> white (full)
+# 2 -> misc (most likely egg hunt)
 def ifGemFull(current, blue):
     bGemPos = 906
     rGemPos = 1055
@@ -93,7 +101,7 @@ def ifGemFull(current, blue):
                 print('white')
                 return 1 # white
     print("possible egg hunt")
-    return False # neither yellow or white
+    return 2 # neither yellow or white
 
 def gemPopCloseButton(current):
     collectButtX = 1280

@@ -8,7 +8,9 @@ import ult
 
 
 counter = 0
-limit = 1000
+limit = 40
+isGemFullReturn = 0
+prevReturn = 0
 
 time.sleep(1)
 screenshot = capture.windowCapture()
@@ -32,18 +34,35 @@ while True:
         counter = 0
     else:
         counter += 1
-
-    if compare.ifGemFull(screenshot, True) == 1:
+    
+    prevReturn = isGemFullReturn
+    isGemFullReturn = compare.ifGemFull(screenshot, True)
+    if prevReturn == 2 and isGemFullReturn == 1: # prevent unwanted gem pop after egg hunt
+        time.sleep(0.1)
+        prevReturn = 0
+        isGemFullReturn = compare.ifGemFull(screenshot, True)
+    elif isGemFullReturn == 1 and prevReturn != 2:
         print('starting gem pop')
-        time.sleep(3)
+        time.sleep(1)
         ult.menuButton()
         ult.gemPopButton()
         ult.gemPopStart()
         time.sleep(2) # arbitrary value
+        ult.closeGemPopMenu()
         while not compare.gemPopCloseButton(screenshot):
+            screenshot = capture.windowCapture()
             time.sleep(0.1)
         ult.closeGemPop()
         time.sleep(2) # arbitrary value
+        ult.closeGemPopMenu() # in case of accidental click
+        time.sleep(0.5)
+        isGemFullReturn = 0
+        prevReturn = 0
+    # if isGemFullReturn == 2:
+    #         ult.eggHuntPath()
+
+
+        
 
 
     # if frame is read correctly ret is True
