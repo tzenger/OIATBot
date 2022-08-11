@@ -11,6 +11,8 @@ import win32ui
 import win32con
 pyautogui.PAUSE = 0.000000001 # sets delay between pyautogui actions
 
+
+
 def windowCapture():
     w = 2560 # set this
     h = 1440 # set this

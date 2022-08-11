@@ -25,7 +25,7 @@ def compare(current, previous):
     #converting the difference into grayscale images
     gray = cv2.cvtColor(diff, cv2.COLOR_BGR2GRAY)
     cv2.imshow('Differences', gray)
-
+    cv2.waitKey(1)
     #increasing the size of differences after that we can capture them all
     for i in range(0, 3):
         dilated = cv2.dilate(gray.copy(), None, iterations= i+ 1)
@@ -125,4 +125,29 @@ def gemPopCloseButton(current):
     print('not purple')
     print(hsv[i, j])
     cv2.imwrite("notpurplesupposedly.jpg", crop)
+    return False # button does not exist
+
+
+def tapBlastsCloseButton(current):
+    collectButtX = 1094
+    collectButtY = 1398
+
+    left = collectButtX - 3
+    top = collectButtY - 1
+    right = collectButtX + 3
+    bottom = collectButtY + 1
+    crop = current[top:bottom, left:right]
+    
+    hsv = cv2.cvtColor(crop, cv2.COLOR_BGR2HSV)
+    h, w, c = hsv.shape
+    for i in range(h):
+        for j in range(w):
+            if hsv[i, j][0] >= 130 and hsv[i, j][0] <= 134:
+                print('purpletapb')
+                print(hsv[i, j])
+                cv2.imwrite("purplesupposedlytap.jpg", crop)
+                return True # button exists
+    print('not purpletapb')
+    print(hsv[i, j])
+    cv2.imwrite("notpurplesupposedlytap.jpg", crop)
     return False # button does not exist

@@ -60,6 +60,22 @@ def closeGemPopMenu():
     clickHere(1280, 908)
     time.sleep(0.5)
 
+def tapBlastsButton():
+    clickHere(1635, 1180)
+    time.sleep(0.5)
+
+def tapBlasts10Gems():
+    clickHere(1278, 798)
+    time.sleep(0.5)
+
+def tapBlastsWild():
+    clickHere(1282, 851)
+    time.sleep(0.5)
+
+def closeTapBlastsButton():
+    clickHere(1094, 1398)
+    time.sleep(0.5)
+
 def randomPath(i):
     random.seed(random.seed(43))
     for i in range(i):
